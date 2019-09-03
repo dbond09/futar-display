@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+  <table>
+    <tbody>
+
+    </tbody>
+  </table>
+  <br>
+  <br>
+  <br>
+  <br>
+  <input id="character"></input>
+  <button onclick="done()">Done</button>
+  <br>
+  <input id="output"></input>
+  <script>
+    const ROWS = 7;
+    const COLUMNS = 5;
+
+    var matrix = [];
+
+    var tb = document.querySelector('tbody');
+    for (var i = 0; i < ROWS; i++) {
+      var tr = document.createElement('tr');
+      matrix.push([]);
+      for (var j = 0; j < COLUMNS; j++) {
+        var td = document.createElement('td');
+        td.dataset.i = i;
+        td.dataset.j = j;
+        td.onclick = (e) => {
+          var i = e.currentTarget.dataset.i;
+          var j = e.currentTarget.dataset.j;
+          e.currentTarget.className = e.currentTarget.className == 'on' ? '' : 'on';
+          console.log(i, j);
+          matrix[i][j] = (matrix[i][j] + 1) % 2;
+        }
+        tr.appendChild(td);
+        matrix[matrix.length-1].push(0);
+      }
+      tb.appendChild(tr);
+    }
+
+    function done() {
+      console.log(JSON.stringify(matrix));
+      document.querySelector('#output').value = "'" + document.querySelector("#character").value + "': " + JSON.stringify(matrix) + ",";
+      document.querySelector('#output').select();
+      document.execCommand('copy');
+    }
+  </script>
+  <style>
+    body {
+      background-color: black;
+    }
+
+    td {
+      width: 10px;
+      height: 10px;
+      background-color: black;
+      border-radius: 10px;
+      border: 1px solid gray;
+    }
+
+    td.on {
+      background-color: orange;
+    }
+  </style>
+</body>
+</html>
