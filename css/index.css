@@ -21,6 +21,17 @@ p {
 }
 
 #irany {
-  left: 350px;
+  left: 270px;
   top: 10px;
+}
+
+#indulas {
+  right: 55px;
+  text-align: right;
+  top: 10px;
+}
+
+#indulas > span {
+  font-size: 25px;
+  vertical-align: 10%;
 }
