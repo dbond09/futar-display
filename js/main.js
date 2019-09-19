@@ -8,6 +8,7 @@ const DOT_RADIUS = 4;
 const ROWS = 20;
 const COLUMNS = 50;
 
+var loadin = true;
 var times = [];
 
 var content = [];
@@ -23,6 +24,29 @@ canvas.height = (DOT_RADIUS*2) * 8 * 5;
 canvas.width = Math.max(window.innerWidth - 100, 1000);
 const width = Math.floor(canvas.width / (DOT_RADIUS+2));
 
+var megallo = document.getElementById('megallo');
+megallo.style.top = canvas.height + 60 + 'px';
+megallo.onclick = changeStop;
+
+function changeStop(e) {
+  megallo.innerHTML = '<input></input>';
+  megallo.onclick = null;
+  var inputNode = e.currentTarget.childNodes[0];
+  inputNode.focus();
+  inputNode.onkeydown = function(f) {
+    if (f.keyCode == 13) {
+      console.log('he');
+      var stop = inputNode.value;
+      if (names.hasOwnProperty(stop)) {
+        stopId = names[stop].replace('CS', '');
+        megallo.innerHTML = stop;
+        megallo.onclick = changeStop;
+        queryApi();
+      }
+    }
+  }
+}
+
 var last = performance.now();
 var state = 0;
 
@@ -32,7 +56,12 @@ function draw() {
     last = performance.now();
     ctx.fillStyle = '#1a1a1a';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    var matrix = matrixify(content);
+    if (loading) {
+      var matrix = randomNoise();
+    }
+    else {
+      var matrix = matrixify(content);
+    }
     for (var i = 0; i < matrix.length; i++) {
       for (var j = 0; j < matrix[i].length; j++) {
         if (matrix[i][j] > 0) {
@@ -114,4 +143,8 @@ function matrixify(lines) {
     }
   }
   return matrix;
+}
+
+function randomNoise() {
+  var matrix = []
 }

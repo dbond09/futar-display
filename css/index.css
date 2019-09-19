@@ -35,3 +35,24 @@ p {
   font-size: 25px;
   vertical-align: 10%;
 }
+
+#megallo {
+  left: 55px;
+}
+
+#megallo:hover, #megallo:focus-within {
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+#megallo > input {
+  background-color: black;
+  color: white;
+  height: 1em;
+  font-size: inherit;
+  border: none;
+}
+
+#megallo > input:focus {
+  outline: none;
+}

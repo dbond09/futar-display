@@ -1,7 +1,27 @@
+var stops;
+var names;
+var stopId = 'BKK_F01017';
+
+fetch('./ids.json')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(json) {
+    stops = json;
+  })
+
+fetch('./names.json')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(json) {
+    names = json;
+  })
+
 function queryApi() {
   // generateContent(test.data);
   // return;
-  fetch('https://cors-anywhere.herokuapp.com/https://futar.bkk.hu/api/query/v1/ws/otp/api/where/arrivals-and-departures-for-stop.json?includeReferences=agencies,routes,trips,stops&stopId=BKK_F03494&minutesBefore=1&minutesAfter=30&key=bkk-web&version=3&appVersion=3.2.4-19639-9a6d560c')
+  fetch('https://cors-anywhere.herokuapp.com/https://futar.bkk.hu/api/query/v1/ws/otp/api/where/arrivals-and-departures-for-stop.json?includeReferences=agencies,routes,trips,stops&stopId=' + stopId + '&minutesBefore=1&minutesAfter=30&key=bkk-web&version=3&appVersion=3.2.4-19639-9a6d560c')
   .then(function(response) {
     return response.json();
   })
