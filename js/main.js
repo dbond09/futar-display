@@ -8,11 +8,10 @@ const DOT_RADIUS = 4;
 const ROWS = 20;
 const COLUMNS = 50;
 
-var loadin = true;
+var loading = true;
 var times = [];
 
 var content = [];
-queryApi();
 // window.setInterval(function() {
 //   queryApi();
 // }, 20000);
@@ -35,12 +34,15 @@ function changeStop(e) {
   inputNode.focus();
   inputNode.onkeydown = function(f) {
     if (f.keyCode == 13) {
-      console.log('he');
-      var stop = inputNode.value;
+      var stop = Object.keys(names).find(function(s) {
+        return s.toLowerCase().includes(inputNode.value.toLowerCase());
+      });
+      console.log(stop);
       if (names.hasOwnProperty(stop)) {
-        stopId = names[stop].replace('CS', '');
+        stopId = names[stop];
         megallo.innerHTML = stop;
         megallo.onclick = changeStop;
+        loading = true;
         queryApi();
       }
     }
@@ -51,7 +53,7 @@ var last = performance.now();
 var state = 0;
 
 function draw() {
-  if (last < performance.now() - 1000) {
+  if (last < performance.now() - (loading ? 10 : 1000)) {
     state = (state + 1) % 2;
     last = performance.now();
     ctx.fillStyle = '#1a1a1a';
@@ -146,5 +148,8 @@ function matrixify(lines) {
 }
 
 function randomNoise() {
-  var matrix = []
+  var matrix = Array(40).fill().map(()=>Array(width).fill(Math.floor(Math.random()*2)));
+  // var matrix = Array(40).fill().map(()=>Array(width).fill().map(()=>Math.floor(Math.random()*2)));
+
+  return matrix;
 }
