@@ -1,0 +1,14 @@
+{
+  "name": "futar",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "dbond09",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
