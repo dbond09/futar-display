@@ -20,7 +20,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 canvas.height = (DOT_RADIUS*2) * 8 * 5;
-canvas.width = Math.max(window.innerWidth - 100, 1000);
+canvas.width = Math.max(window.innerWidth - 116, 1000);
 const width = Math.floor(canvas.width / (DOT_RADIUS+2));
 
 var megallo = document.getElementById('megallo');

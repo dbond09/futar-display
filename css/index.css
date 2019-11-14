@@ -1,9 +1,15 @@
 body {
+  margin: 8px;
   background-color: black;
+  background-image: url(/bp1.jpg);
+  background-size: cover;
 }
 
 canvas {
   padding: 50px;
+  padding-bottom: 70px;
+  background-color: black;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
 }
 
 p {

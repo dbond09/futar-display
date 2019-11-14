@@ -2,7 +2,7 @@ var stops;
 var names;
 var contentObjects = [];
 var contentReferences = {routes: [], trips: []};
-var stopId = 'BKK_CSF03493';
+var stopId = 'BKK_CSF01108'; // Astoria M
 
 fetch('./ids.json')
   .then(function(response) {
