@@ -13,4 +13,14 @@
   <script src="js/chars.js"></script>
   <script src="js/api.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    var stopId = "<%= stopId %>";
+    var stopName = "<%= stopName %>";
+    if (stopName[0] != "<") {
+      document.querySelector("#megallo").innerText = stopName;
+    }
+    else {
+      stopId = "BKK_CSF01108";
+    }
+  </script>
 </body>

@@ -2,7 +2,7 @@ var stops;
 var names;
 var contentObjects = [];
 var contentReferences = {routes: [], trips: []};
-var stopId = 'BKK_CSF01108'; // Astoria M
+// var stopId = 'BKK_CSF01108'; // Astoria M
 
 fetch('./ids.json')
   .then(function(response) {
@@ -34,9 +34,10 @@ function queryApi() {
     var ids = [stopId];
   }
   for (var i = 0; i < ids.length; i++) {
-    fetch('https://cors-anywhere.herokuapp.com/https://futar.bkk.hu/api/query/v1/ws/otp/api/where/arrivals-and-departures-for-stop.json?includeReferences=agencies,routes,trips,stops&stopId=' + ids[i] + '&minutesBefore=1&minutesAfter=30&key=bkk-web&version=3&appVersion=3.2.4-19639-9a6d560c')
+    // fetch('https://cors-anywhere.herokuapp.com/https://futar.bkk.hu/api/query/v1/ws/otp/api/where/arrivals-and-departures-for-stop.json?includeReferences=agencies,routes,trips,stops&stopId=' + ids[i] + '&minutesBefore=1&minutesAfter=30&key=bkk-web&version=3&appVersion=3.2.4-19639-9a6d560c')
+    fetch("/api/stop/" + ids[i])
     .then(function(response) {
-      console.log(response.status);
+      // console.log(response.status);
       return response.json();
     })
     .then(function(json) {
