@@ -11,7 +11,7 @@ const COLUMNS = 50;
 var loading = true;
 var times = [];
 
-var content = [];
+var content = ["Betöltés...†"];
 // window.setInterval(function() {
 //   queryApi();
 // }, 20000);
@@ -59,7 +59,7 @@ function draw() {
     ctx.fillStyle = '#1a1a1a';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     if (loading) {
-      var matrix = randomNoise();
+      var matrix = matrixify(["Betöltés...†"]);
     }
     else {
       var matrix = matrixify(content);
