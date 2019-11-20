@@ -4,46 +4,55 @@ var contentObjects = [];
 var contentReferences = {routes: [], trips: []};
 // var stopId = 'BKK_CSF01108'; // Astoria M
 
-fetch('./ids.json')
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(json) {
-    stops = json;
-    queryApi();
+// fetch('/js/ids.json')
+//   .then(function(response) {
+//     return response.json();
+//   })
+//   .then(function(json) {
+//     stops = json;
+//     queryApi();
+//
+//   })
 
-  })
-
-fetch('./names.json')
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(json) {
-    names = json;
-  })
+// fetch('/js/names.json')
+//   .then(function(response) {
+//     return response.json();
+//   })
+//   .then(function(json) {
+//     names = json;
+//   })
 
 function queryApi() {
   // generateContent(test.data);
   // return;
   contentObjects = [];
   content = [];
-  if (stops[stopId].children) {
-    var ids = stops[stopId].children;
-  }
-  else {
-    var ids = [stopId];
-  }
-  for (var i = 0; i < ids.length; i++) {
+  // if (stops[stopId].children) {
+    // var ids = stops[stopId].children;
+  // }
+  // else {
+    // var ids = [stopId];
+  // }
+  // for (var i = 0; i < ids.length; i++) {
     // fetch('https://cors-anywhere.herokuapp.com/https://futar.bkk.hu/api/query/v1/ws/otp/api/where/arrivals-and-departures-for-stop.json?includeReferences=agencies,routes,trips,stops&stopId=' + ids[i] + '&minutesBefore=1&minutesAfter=30&key=bkk-web&version=3&appVersion=3.2.4-19639-9a6d560c')
-    fetch("/api/stop/" + ids[i])
+    fetch("/api/children/" + stopId)
     .then(function(response) {
-      // console.log(response.status);
       return response.json();
     })
-    .then(function(json) {
-      generateContent(json.data);
+    .then(function(response) {
+      for (var i = 0; i < response.length; i++) {
+        fetch("/api/stop/" + response[i])
+        .then(function(response) {
+          // console.log(response.status);
+          return response.json();
+        })
+        .then(function(json) {
+          generateContent(json.data);
+        })
+      }
     })
-  }
+
+  // }
 }
 
 function generateContent(data) {

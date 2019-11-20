@@ -3,3 +3,6 @@ stops.json
 stops.py
 ids.json
 node_modules
+.DS_Store
+__pycache__/*
+.now/*
