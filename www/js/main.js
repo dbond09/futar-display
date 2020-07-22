@@ -24,27 +24,50 @@ canvas.width = Math.max(window.innerWidth - 116, 1000);
 const width = Math.floor(canvas.width / (DOT_RADIUS+2));
 
 var megallo = document.getElementById('megallo');
-megallo.style.top = canvas.height + 60 + 'px';
+// megallo.style.top = canvas.height + 60 + 'px';
 megallo.onclick = changeStop;
 
 function changeStop(e) {
   megallo.innerHTML = '<input></input>';
   megallo.onclick = null;
+  megallo.parentElement.classList.add("input");
   var inputNode = e.currentTarget.childNodes[0];
   inputNode.focus();
-  inputNode.onkeydown = function(f) {
+  inputNode.onkeyup = function(f) {
     if (f.keyCode == 13) {
       var stop = Object.keys(names).find(function(s) {
         return s.toLowerCase().includes(inputNode.value.toLowerCase());
       });
       console.log(stop);
       if (names.hasOwnProperty(stop)) {
+        document.querySelector("#megallo-container").classList.remove("input");
         stopId = names[stop];
         megallo.innerHTML = stop;
         megallo.onclick = changeStop;
         loading = true;
         queryApi();
       }
+    }
+    else {
+      var possibleStops = Object.keys(names).filter(function(s) {
+        return s.toLowerCase().includes(inputNode.value.toLowerCase());
+      });
+      document.querySelector("#autofill").innerHTML = "";
+      for (var i = 0; i < Math.min(possibleStops.length, 5); i++) {
+        var p = document.createElement("p");
+        p.innerText = possibleStops[i];
+        p.onclick = (f)=>{
+          document.querySelector("#megallo-container").classList.remove("input");
+          var stop = f.target.innerText;
+          stopId = names[stop];
+          megallo.innerHTML = stop;
+          megallo.onclick = changeStop;
+          loading = true;
+          queryApi();
+        }
+        document.querySelector("#autofill").appendChild(p);
+      }
+      console.log(f.target.value)
     }
   }
 }

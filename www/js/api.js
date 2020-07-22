@@ -14,13 +14,13 @@ var contentReferences = {routes: [], trips: []};
 //
 //   })
 
-// fetch('/js/names.json')
-//   .then(function(response) {
-//     return response.json();
-//   })
-//   .then(function(json) {
-//     names = json;
-//   })
+fetch('/js/names.json')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(json) {
+    names = json;
+  })
 
 function queryApi() {
   // generateContent(test.data);
